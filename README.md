@@ -2,7 +2,7 @@
 
 ## 📌 Project Overview
 
-**F1 Insight** is a web-based platform that leverages Artificial Intelligence (AI) and Machine Learning (ML) to analyze historical Formula 1 data and generate intelligent predictions for upcoming races, driver performances, and final standings.
+**F1 Insight** is a web-based platform that leverages Machine Learning (ML) to analyze historical Formula 1 data and generate intelligent predictions for upcoming races, driver performances, and final standings.
 
 The platform is designed to offer an **interactive and informative experience** for F1 enthusiasts by combining statistical analysis, data visualization, and personalized predictions — all through a modern, intuitive web interface.
 
