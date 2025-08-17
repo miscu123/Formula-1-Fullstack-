@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { ChevronRight, Play, Calendar, Trophy, Zap, Users, ArrowRight, Star } from 'lucide-react';
+import './LandingPage.css';
 
 export default function F1LandingPage() {
   const [isVisible, setIsVisible] = useState(false);
@@ -58,7 +59,7 @@ export default function F1LandingPage() {
       </nav>
 
       {/* Hero Section */}
-      <section className="relative h-screen flex items-center justify-center overflow-hidden">
+      <section className="relative h-screen flex items-center justify-center overflow-hidden f1-bg">
         {/* Racing Lines Animation */}
         <div className="absolute inset-0">
           {[...Array(5)].map((_, i) => (
@@ -86,7 +87,7 @@ export default function F1LandingPage() {
           <h1 className="text-6xl md:text-8xl font-black tracking-tighter mb-6 bg-gradient-to-r from-white via-red-300 to-white bg-clip-text text-transparent">
             PURE
             <br />
-            <span className="text-red-500">VELOCITY</span>
+            <span className="text-red-400">VELOCITY</span>
           </h1>
           
           <p className="text-xl md:text-2xl text-gray-300 mb-8 max-w-2xl mx-auto leading-relaxed">
@@ -298,29 +299,6 @@ export default function F1LandingPage() {
           </div>
         </div>
       </footer>
-
-      <style jsx>{`
-        @keyframes slide-0 {
-          0% { transform: translateX(-100%); }
-          100% { transform: translateX(100%); }
-        }
-        @keyframes slide-1 {
-          0% { transform: translateX(-100%); }
-          100% { transform: translateX(100%); }
-        }
-        @keyframes slide-2 {
-          0% { transform: translateX(-100%); }
-          100% { transform: translateX(100%); }
-        }
-        @keyframes slide-3 {
-          0% { transform: translateX(-100%); }
-          100% { transform: translateX(100%); }
-        }
-        @keyframes slide-4 {
-          0% { transform: translateX(-100%); }
-          100% { transform: translateX(100%); }
-        }
-      `}</style>
     </div>
   );
 }
