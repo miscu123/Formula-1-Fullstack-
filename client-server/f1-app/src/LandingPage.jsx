@@ -4,7 +4,7 @@ import './LandingPage.css';
 
 export default function F1LandingPage() {
   const [isVisible, setIsVisible] = useState(false);
-  const [activeDriver, setActiveDriver] = useState(0);
+  const [ActivePredictor, setActivePredictor] = useState(0);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
 
   useEffect(() => {
@@ -16,10 +16,10 @@ export default function F1LandingPage() {
     return () => window.removeEventListener('mousemove', handleMouseMove);
   }, []);
 
-  const drivers = [
-    { name: "Max Verstappen", team: "Red Bull Racing", points: 575, country: "NED" },
-    { name: "Lewis Hamilton", team: "Mercedes", points: 234, country: "GBR" },
-    { name: "Charles Leclerc", team: "Ferrari", points: 206, country: "MON" }
+  const predictors = [
+    { name: "Qualifying Grid AI", description: "Predict the starting grid", acc: 87.5},
+    { name: "Podium AI", description: "Predict the podium", acc: 80},
+    { name: "Whole Grid Result AI", description: "Predict the whole grid", acc: 78.9}
   ];
 
   const races = [
@@ -47,7 +47,7 @@ export default function F1LandingPage() {
           <span className="text-2xl font-bold tracking-wider">FORMULA 1</span>
         </div>
         <div className="hidden md:flex space-x-8">
-          {['Racing', 'Drivers', 'Schedule', 'News', 'Shop'].map((item) => (
+          {['Drivers', 'Teams', 'Races', 'Schedule', 'Login / Sign Up'].map((item) => (
             <button key={item} className="hover:text-red-500 transition-colors duration-300 font-medium tracking-wide">
               {item}
             </button>
@@ -78,32 +78,28 @@ export default function F1LandingPage() {
         </div>
 
         <div className={`relative z-10 text-center px-6 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-20'}`}>
-          <div className="mb-6 flex justify-center">
-            <div className="bg-red-600/20 border border-red-600/40 rounded-full px-4 py-2 text-red-400 font-medium backdrop-blur-sm">
-              🏁 2024 WORLD CHAMPIONSHIP
-            </div>
-          </div>
+          
           
           <h1 className="text-6xl md:text-8xl font-black tracking-tighter mb-6 bg-gradient-to-r from-white via-red-300 to-white bg-clip-text text-transparent">
-            PURE
+            Overtake
             <br />
-            <span className="text-red-400">VELOCITY</span>
+            <span className="text-red-400">Intelligence</span>
           </h1>
           
           <p className="text-xl md:text-2xl text-gray-300 mb-8 max-w-2xl mx-auto leading-relaxed">
-            Experience the pinnacle of motorsport. Where legends are born and limits are shattered at <span className="text-red-500 font-semibold">350 km/h</span>.
+            We predict the outcomes of the pinnacle of motorsport. Where legends are born and limits are shattered at <span className="text-red-500 font-semibold">350 km/h</span>.
           </p>
           
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
             <button className="group bg-red-600 hover:bg-red-700 px-8 py-4 rounded-full font-bold text-lg transition-all duration-300 transform hover:scale-105 shadow-2xl shadow-red-600/40 flex items-center space-x-3">
               <Play size={20} />
-              <span>Watch Highlights</span>
+              <span>View AI predictions</span>
               <ArrowRight className="group-hover:translate-x-1 transition-transform" size={20} />
             </button>
             
             <button className="group border-2 border-white hover:bg-white hover:text-black px-8 py-4 rounded-full font-bold text-lg transition-all duration-300 flex items-center space-x-3">
               <Calendar size={20} />
-              <span>View Schedule</span>
+              <span>About our AI</span>
               <ChevronRight className="group-hover:translate-x-1 transition-transform" size={20} />
             </button>
           </div>
@@ -121,21 +117,21 @@ export default function F1LandingPage() {
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-5xl font-black mb-6 bg-gradient-to-r from-white to-red-500 bg-clip-text text-transparent">
-              CHAMPIONSHIP LEADERS
+              INCLUDED PREDICTIONS 
             </h2>
             <div className="w-24 h-1 bg-red-600 mx-auto rounded-full"></div>
           </div>
 
           <div className="grid md:grid-cols-3 gap-6">
-            {drivers.map((driver, index) => (
+            {predictors.map((predictor, index) => (
               <div
-                key={driver.name}
+                key={predictor.name}
                 className={`group relative bg-gradient-to-br from-gray-800 to-gray-900 rounded-2xl p-8 border-2 transition-all duration-500 hover:scale-105 cursor-pointer ${
                   index === 0 ? 'border-yellow-500 shadow-2xl shadow-yellow-500/20' : 
                   index === 1 ? 'border-gray-400 shadow-2xl shadow-gray-400/20' : 
                   'border-orange-500 shadow-2xl shadow-orange-500/20'
                 }`}
-                onMouseEnter={() => setActiveDriver(index)}
+                onMouseEnter={() => setActivePredictor(index)}
               >
                 {index === 0 && (
                   <div className="absolute -top-4 -right-4 bg-yellow-500 rounded-full p-3">
@@ -150,17 +146,16 @@ export default function F1LandingPage() {
                     #{index + 1}
                   </div>
                   <div className="text-right">
-                    <div className="text-2xl font-bold text-red-500">{driver.points}</div>
-                    <div className="text-sm text-gray-400 uppercase">POINTS</div>
+                    <div className="text-2xl font-bold text-red-500">{predictor.acc}</div>
+                    <div className="text-sm text-gray-400 uppercase">ACCURACY</div>
                   </div>
                 </div>
 
-                <h3 className="text-2xl font-bold mb-2">{driver.name}</h3>
-                <p className="text-gray-400 mb-4">{driver.team}</p>
+                <h3 className="text-2xl font-bold mb-2">{predictor.name}</h3>
+                <p className="text-gray-400 mb-4">{predictor.description}</p>
                 
                 <div className="flex items-center justify-between">
                   <span className="bg-red-600/20 text-red-400 px-3 py-1 rounded-full text-sm font-medium">
-                    {driver.country}
                   </span>
                   <div className="flex space-x-1">
                     {[...Array(5)].map((_, i) => (
@@ -250,9 +245,9 @@ export default function F1LandingPage() {
       {/* CTA Section */}
       <section className="py-20 px-6 bg-gradient-to-r from-red-600 to-red-800">
         <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-5xl font-black mb-6">JOIN THE REVOLUTION</h2>
+          <h2 className="text-5xl font-black mb-6">JOIN THE COMMUNITY</h2>
           <p className="text-xl mb-8 opacity-90">
-            Experience Formula 1 like never before. Get exclusive access to live timing, onboard cameras, and behind-the-scenes content.
+            Experience Formula 1 like never before. Get exclusive access to live predictions, and behind-the-scenes content.
           </p>
           
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -280,7 +275,7 @@ export default function F1LandingPage() {
               <p className="text-gray-400">The pinnacle of motorsport excellence.</p>
             </div>
             
-            {['Racing', 'Teams', 'Support'].map((category) => (
+            {['Predictors', 'Races', 'FAQ'].map((category) => (
               <div key={category}>
                 <h4 className="font-bold mb-4">{category}</h4>
                 <div className="space-y-2">
