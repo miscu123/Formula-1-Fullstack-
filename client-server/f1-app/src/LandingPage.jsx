@@ -91,11 +91,15 @@ export default function F1LandingPage() {
           </p>
           
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-            <button className="group bg-red-600 hover:bg-red-700 px-8 py-4 rounded-full font-bold text-lg transition-all duration-300 transform hover:scale-105 shadow-2xl shadow-red-600/40 flex items-center space-x-3">
+            <button
+              className="group bg-red-600 hover:bg-red-700 px-8 py-4 rounded-full font-bold text-lg transition-all duration-300 transform hover:scale-105 shadow-2xl shadow-red-600/40 flex items-center space-x-3"
+              onClick={() => window.location.href = './F1Predictions'} // sau URL complet
+            >
               <Play size={20} />
               <span>View AI predictions</span>
               <ArrowRight className="group-hover:translate-x-1 transition-transform" size={20} />
             </button>
+
             
             <button className="group border-2 border-white hover:bg-white hover:text-black px-8 py-4 rounded-full font-bold text-lg transition-all duration-300 flex items-center space-x-3">
               <Calendar size={20} />
