@@ -84,3 +84,9 @@ Account creation and login for personalized predictions and preferences.
 - Git
 - Docker
 - Swagger (for API documentation)
+
+### Commands
+
+- Start site (venv NOT active): npm run dev
+- Start django server (venv active): python manage.py runserver
+- Start venv: .\venv\Scripts\Activate.ps1
