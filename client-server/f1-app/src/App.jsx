@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import LandingPage from './LandingPage';
-import F1Predictions from './F1Predictions'; // Create this component for the "Make" page
+import F1Predictions from './F1Predictions'; 
 
 function App() {
   return (

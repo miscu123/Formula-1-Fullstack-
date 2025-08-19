@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { ChevronRight, Play, Calendar, Trophy, Zap, Users, ArrowRight, Star } from 'lucide-react';
 import './LandingPage.css';
+import { Link } from "react-router-dom";
 
 export default function F1LandingPage() {
   const [isVisible, setIsVisible] = useState(false);
@@ -23,14 +24,13 @@ export default function F1LandingPage() {
   ];
 
   const races = [
-    { name: "Monaco Grand Prix", date: "May 26, 2024", location: "Monte Carlo" },
-    { name: "Canadian Grand Prix", date: "Jun 9, 2024", location: "Montreal" },
-    { name: "British Grand Prix", date: "Jul 7, 2024", location: "Silverstone" }
+    { name: "Dutch Grand Prix", date: "Aug 31, 2025", location: "Circuit Zandvoort" },
+    { name: "Italian Grand Prix", date: "Sep 7, 2025", location: "Autodromo Nazionale Monza" },
+    { name: "Azerbaijan Grand Prix", date: "Sep 21, 2025", location: "Baku City Circuit" }
   ];
 
   return (
     <div className="min-h-screen bg-black text-white overflow-hidden">
-      {/* Dynamic Background Pattern */}
       <div 
         className="fixed inset-0 opacity-10 pointer-events-none"
         style={{
@@ -128,11 +128,12 @@ export default function F1LandingPage() {
 
           <div className="grid md:grid-cols-3 gap-6">
             {predictors.map((predictor, index) => (
+              <Link key={predictor.name} to="/F1Predictions" className="block">
               <div
                 key={predictor.name}
                 className={`group relative bg-gradient-to-br from-gray-800 to-gray-900 rounded-2xl p-8 border-2 transition-all duration-500 hover:scale-105 cursor-pointer ${
                   index === 0 ? 'border-yellow-500 shadow-2xl shadow-yellow-500/20' : 
-                  index === 1 ? 'border-gray-400 shadow-2xl shadow-gray-400/20' : 
+                  index === 1 ? 'border-gray-400 shadow-2xl shadow-gray-400/20': 
                   'border-orange-500 shadow-2xl shadow-orange-500/20'
                 }`}
                 onMouseEnter={() => setActivePredictor(index)}
@@ -168,6 +169,7 @@ export default function F1LandingPage() {
                   </div>
                 </div>
               </div>
+              </Link>
             ))}
           </div>
         </div>
