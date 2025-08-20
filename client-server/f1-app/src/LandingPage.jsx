@@ -41,7 +41,8 @@ export default function F1LandingPage() {
       {/* Navigation */}
       <nav className="relative z-50 p-6 flex justify-between items-center bg-black/80 backdrop-blur-md border-b border-red-900/30">
         <div className="flex items-center space-x-4">
-          <div className="w-12 h-12 bg-gradient-to-br from-red-600 to-red-800 rounded-lg flex items-center justify-center font-black text-xl transform hover:scale-110 transition-all duration-300">
+          <div className="w-12 h-12 bg-gradient-to-br from-red-600 to-red-800 rounded-lg flex items-center justify-center font-black text-xl transform hover:scale-110 transition-all duration-300 cursor-pointer"
+          onClick={() => window.location.href = './'}>
             F1
           </div>
           <span className="text-2xl font-bold tracking-wider">FORMULA 1</span>
@@ -93,15 +94,15 @@ export default function F1LandingPage() {
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
             <button
               className="group bg-red-600 hover:bg-red-700 px-8 py-4 rounded-full font-bold text-lg transition-all duration-300 transform hover:scale-105 shadow-2xl shadow-red-600/40 flex items-center space-x-3"
-              onClick={() => window.location.href = './F1Predictions'} // sau URL complet
-            >
+              onClick={() => window.location.href = './F1Predictions'}>
               <Play size={20} />
               <span>View AI predictions</span>
               <ArrowRight className="group-hover:translate-x-1 transition-transform" size={20} />
             </button>
 
             
-            <button className="group border-2 border-white hover:bg-white hover:text-black px-8 py-4 rounded-full font-bold text-lg transition-all duration-300 flex items-center space-x-3">
+            <button className="group border-2 border-white hover:bg-white hover:text-black px-8 py-4 rounded-full font-bold text-lg transition-all duration-300 flex items-center space-x-3"
+            onClick={() => window.location.href = './About'}>
               <Calendar size={20} />
               <span>About our AI</span>
               <ChevronRight className="group-hover:translate-x-1 transition-transform" size={20} />
@@ -260,7 +261,8 @@ export default function F1LandingPage() {
             <button className="bg-white text-red-600 hover:bg-gray-100 px-8 py-4 rounded-full font-bold text-lg transition-all duration-300 transform hover:scale-105 shadow-2xl">
               Start Free Trial
             </button>
-            <button className="border-2 border-white hover:bg-white hover:text-red-600 px-8 py-4 rounded-full font-bold text-lg transition-all duration-300">
+            <button className="border-2 border-white hover:bg-white hover:text-red-600 px-8 py-4 rounded-full font-bold text-lg transition-all duration-300"
+            onClick={() => window.location.href = './About'}>
               Learn More
             </button>
           </div>

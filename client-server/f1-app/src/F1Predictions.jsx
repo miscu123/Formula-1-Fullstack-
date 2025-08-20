@@ -27,12 +27,12 @@ const F1Predictions = () => {
       if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
       const data = await response.json();
 
-      // Filter only 2024 races
-      const races2024 = data.filter(race => race.date.startsWith('2024'));
-      setRaces(races2024);
+      // Filter only 2024 races for latest races predictions
+      const races = data.filter(race => race.date.startsWith('2024'));
+      setRaces(races);
 
       // Default to first race if available
-      if (races2024.length > 0) setSelectedRace(races2024[0].id);
+      if (races.length > 0) setSelectedRace(races[0].id);
     } catch (err) {
       console.error('Error fetching races:', err);
       setError(err.message);
@@ -89,7 +89,7 @@ const F1Predictions = () => {
       {/* Navigation - Same as landing page */}
       <nav className="relative z-50 p-6 flex justify-between items-center bg-black/80 backdrop-blur-md border-b border-red-900/30">
         <div className="flex items-center space-x-4">
-          <button className="w-12 h-12 bg-gradient-to-br from-red-600 to-red-800 rounded-lg flex items-center justify-center font-black text-xl transform hover:scale-110 transition-all duration-300"
+          <button className="w-12 h-12 bg-gradient-to-br from-red-600 to-red-800 rounded-lg flex items-center justify-center font-black text-xl transform hover:scale-110 transition-all duration-300 cursor-pointer"
           onClick={() => window.location.href = './'}>
             F1
           </button>
