@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { ChevronRight, Database, Brain, BarChart3, Users, Code, Zap, Target, Settings, Globe, Shield, TrendingUp } from 'lucide-react';
 import './LandingPage.css';
+import './F1Predictions';
 import { Link } from "react-router-dom";
 
 export default function About() {
@@ -138,7 +139,7 @@ export default function About() {
           <h1 className="text-6xl md:text-8xl font-black tracking-tighter mb-6 bg-gradient-to-r from-white via-red-300 to-white bg-clip-text text-transparent">
             About
             <br />
-            <span className="text-red-400">F1 Insight</span>
+            <span className="text-red-400">Overtake Intelligence</span>
           </h1>
           
           <p className="text-xl md:text-2xl text-gray-300 mb-8 max-w-3xl mx-auto leading-relaxed">
@@ -156,7 +157,7 @@ export default function About() {
             </h2>
             <div className="w-24 h-1 bg-red-600 mx-auto rounded-full mb-8"></div>
             <p className="text-xl text-gray-300 max-w-4xl mx-auto leading-relaxed">
-              F1 Insight is a cutting-edge web platform that combines statistical analysis, data visualization, 
+              Overtake Intelligence is a cutting-edge web platform that combines statistical analysis, data visualization, 
               and personalized predictions to deliver an <span className="text-red-500 font-semibold">interactive and informative experience</span> for Formula 1 enthusiasts through a modern, intuitive interface.
             </p>
           </div>
@@ -307,7 +308,7 @@ export default function About() {
                 <div className="w-10 h-10 bg-gradient-to-br from-red-600 to-red-800 rounded-lg flex items-center justify-center font-black">
                   F1
                 </div>
-                <span className="text-xl font-bold">F1 INSIGHT</span>
+                <span className="text-xl font-bold">Overtake Intelligence</span>
               </div>
               <p className="text-gray-400">AI-powered Formula 1 predictions and analysis.</p>
             </div>
@@ -327,7 +328,7 @@ export default function About() {
           </div>
           
           <div className="border-t border-gray-700 pt-8 text-center text-gray-400">
-            <p>&copy; 2024 F1 Insight. All rights reserved. | Powered by Machine Learning.</p>
+            <p>&copy; 2025 Overtake Intelligence. All rights reserved. | Powered by Machine Learning.</p>
           </div>
         </div>
       </footer>

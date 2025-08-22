@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { ChevronRight, Play, Calendar, Trophy, Zap, Users, ArrowRight, Star } from 'lucide-react';
 import './LandingPage.css';
+import './F1Predictions';
 import { Link } from "react-router-dom";
 
 export default function F1LandingPage() {
@@ -16,6 +17,16 @@ export default function F1LandingPage() {
     window.addEventListener('mousemove', handleMouseMove);
     return () => window.removeEventListener('mousemove', handleMouseMove);
   }, []);
+
+  const getNavLink = (item) => {
+    switch(item) {
+        case 'Home': return '/';
+        case 'Predictions': return '/F1Predictions';
+        case 'Dashboard': return '#'; 
+        case 'Login / SignUp': return '#'; 
+        default: return '#';
+    }
+  };
 
   const predictors = [
     { name: "Qualifying Grid AI", description: "Predict the starting grid", acc: 87.5},
@@ -40,24 +51,29 @@ export default function F1LandingPage() {
       
       {/* Navigation */}
       <nav className="relative z-50 p-6 flex justify-between items-center bg-black/80 backdrop-blur-md border-b border-red-900/30">
-        <div className="flex items-center space-x-4">
-          <div className="w-12 h-12 bg-gradient-to-br from-red-600 to-red-800 rounded-lg flex items-center justify-center font-black text-xl transform hover:scale-110 transition-all duration-300 cursor-pointer"
-          onClick={() => window.location.href = './'}>
-            F1
-          </div>
-          <span className="text-2xl font-bold tracking-wider">FORMULA 1</span>
-        </div>
-        <div className="hidden md:flex space-x-8">
-          {['Drivers', 'Teams', 'Races', 'Schedule', 'Login / Sign Up'].map((item) => (
-            <button key={item} className="hover:text-red-500 transition-colors duration-300 font-medium tracking-wide">
-              {item}
-            </button>
-          ))}
-        </div>
-        <button className="bg-red-600 hover:bg-red-700 px-6 py-2 rounded-full font-semibold transition-all duration-300 transform hover:scale-105 shadow-lg shadow-red-600/30">
-          Watch Live
-        </button>
-      </nav>
+              <Link to="/" className="flex items-center space-x-4">
+                <div className="w-12 h-12 bg-gradient-to-br from-red-600 to-red-800 rounded-lg flex items-center justify-center font-black text-xl transform hover:scale-110 transition-all duration-300 cursor-pointer">
+                  F1
+                </div>
+                <span className="text-2xl font-bold tracking-wider">FORMULA 1</span>
+              </Link>
+              <div className="hidden md:flex space-x-8">
+              {['Home', 'Predictions', 'Dashboard', 'Login / SignUp'].map((item) => (
+                  <Link 
+                  key={item} 
+                  to={getNavLink(item)} 
+                  className="hover:text-red-500 transition-colors duration-300 font-medium tracking-wide">
+                  {item}
+                  </Link>
+              ))}
+              </div>
+              <Link to="/F1Predictions">
+                <button className="bg-red-600 hover:bg-red-700 px-6 py-2 rounded-full font-semibold transition-all duration-300 transform hover:scale-105 shadow-lg shadow-red-600/30"
+                >
+                  View Predictions
+                </button>
+              </Link>
+        </nav>
 
       {/* Hero Section */}
       <section className="relative h-screen flex items-center justify-center overflow-hidden f1-bg">
@@ -278,7 +294,7 @@ export default function F1LandingPage() {
                 <div className="w-10 h-10 bg-gradient-to-br from-red-600 to-red-800 rounded-lg flex items-center justify-center font-black">
                   F1
                 </div>
-                <span className="text-xl font-bold">FORMULA 1</span>
+                <span className="text-xl font-bold">Overtake Intelligence</span>
               </div>
               <p className="text-gray-400">The pinnacle of motorsport excellence.</p>
             </div>
@@ -298,7 +314,7 @@ export default function F1LandingPage() {
           </div>
           
           <div className="border-t border-gray-700 pt-8 text-center text-gray-400">
-            <p>&copy; 2024 Formula 1. All rights reserved. | Experience the speed.</p>
+            <p>&copy; 2025 Overtake Intelligence. All rights reserved. | Experience the speed.</p>
           </div>
         </div>
       </footer>

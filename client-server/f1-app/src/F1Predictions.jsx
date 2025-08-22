@@ -75,7 +75,7 @@ const F1Predictions = () => {
     { position: '2nd', gradient: 'from-gray-400 to-gray-500', bgGlow: 'shadow-gray-400/30', ring: 'ring-gray-400/50', icon: '🥈' },
     { position: '3rd', gradient: 'from-orange-500 to-orange-600', bgGlow: 'shadow-orange-500/30', ring: 'ring-orange-400/50', icon: '🥉' }
   ];
-
+  
   return (
     <div className="min-h-screen bg-black text-white overflow-hidden overflow-x-hidden">
       {/* Mouse follow effect */}
@@ -102,8 +102,9 @@ const F1Predictions = () => {
             </button>
           ))}
         </div>
-        <button className="bg-red-600 hover:bg-red-700 px-6 py-2 rounded-full font-semibold transition-all duration-300 transform hover:scale-105 shadow-lg shadow-red-600/30">
-          Watch Live
+        <button className="bg-red-600 hover:bg-red-700 px-6 py-2 rounded-full font-semibold transition-all duration-300 transform hover:scale-105 shadow-lg shadow-red-600/30"
+        onClick={() => window.location.href = '/F1Predictions'}>
+          View Predictions
         </button>
       </nav>
 
@@ -306,6 +307,40 @@ const F1Predictions = () => {
           }
         }
       `}} />
+
+      {/* Footer */}
+      <footer className="bg-gray-900 border-t border-gray-700 py-12 px-6">
+        <div className="max-w-6xl mx-auto">
+          <div className="grid md:grid-cols-4 gap-8 mb-8">
+            <div>
+              <div className="flex items-center space-x-4 mb-4">
+                <div className="w-10 h-10 bg-gradient-to-br from-red-600 to-red-800 rounded-lg flex items-center justify-center font-black">
+                  F1
+                </div>
+                <span className="text-xl font-bold">Overtake Intelligence</span>
+              </div>
+              <p className="text-gray-400">The pinnacle of motorsport excellence.</p>
+            </div>
+            
+            {['Predictors', 'Races', 'FAQ'].map((category) => (
+              <div key={category}>
+                <h4 className="font-bold mb-4">{category}</h4>
+                <div className="space-y-2">
+                  {['Link 1', 'Link 2', 'Link 3'].map((link) => (
+                    <div key={link} className="text-gray-400 hover:text-white transition-colors cursor-pointer">
+                      {link}
+                    </div>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+          
+          <div className="border-t border-gray-700 pt-8 text-center text-gray-400">
+            <p>&copy; 2025 Overtake Intelligence. All rights reserved. | Experience the speed.</p>
+          </div>
+        </div>
+      </footer>
     </div>
   );
 };
