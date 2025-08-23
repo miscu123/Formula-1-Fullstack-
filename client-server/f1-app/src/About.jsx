@@ -75,7 +75,7 @@ export default function About() {
   ];
 
   const techStack = {
-    backend: ["Python", "FastAPI", "scikit-learn", "pandas", "NumPy"],
+    backend: ["Python", "Django", "scikit-learn", "pandas", "NumPy"],
     frontend: ["React.js", "TailwindCSS", "Chart.js", "Recharts"],
     database: ["MongoDB"],
     others: ["Git", "Docker", "Swagger"]
