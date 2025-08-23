@@ -1,4 +1,4 @@
-# 🏎️ F1 Insight – AI-Powered Formula 1 Predictions
+# 🏎️ F1 Overtake Intelligence – AI-Powered Formula 1 Predictions
 
 ## 📌 Project Overview
 
@@ -17,6 +17,8 @@ Collect and preprocess historical F1 data, including:
 - Qualifying data
 - Driver and team stats
 - Circuit information
+- Lap times
+- And many more
 
 ### 🤖 Machine Learning Model Development
 
@@ -64,10 +66,11 @@ Account creation and login for personalized predictions and preferences.
 ### Backend (AI & API)
 
 - Python
-- FastAPI
-- scikit-learn
-- pandas
+- Django
+- XGBoost
+- Pandas
 - NumPy
+- Matplotlib
 
 ### Frontend
 
@@ -88,5 +91,5 @@ Account creation and login for personalized predictions and preferences.
 ### Commands
 
 - Start site (venv NOT active): npm run dev
-- Start django server (venv active): python manage.py runserver
 - Start venv: .\venv\Scripts\Activate.ps1
+- Start django server (venv active): python manage.py runserver
