@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { ChevronRight, Play, Calendar, Trophy, Zap, Users, ArrowRight, Star } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 const F1Predictions = () => {
   const [races, setRaces] = useState([]);
@@ -10,6 +11,31 @@ const F1Predictions = () => {
   const [lastUpdated, setLastUpdated] = useState(null);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [isVisible, setIsVisible] = useState(false);
+
+  // Navigation component cu Link-uri funcționale
+  function NavigationMenuWithLinks() {
+    const menuItems = [
+      { name: 'Drivers', path: '/drivers' },
+      { name: 'Teams', path: '/teams' },
+      { name: 'Races', path: '/races' },
+      { name: 'Schedule', path: '/schedule' },
+      { name: 'Login / Sign Up', path: '/auth' }
+    ];
+
+    return (
+      <div className="hidden md:flex space-x-8">
+        {menuItems.map((item) => (
+          <Link 
+            key={item.name} 
+            to={item.path}
+            className="hover:text-red-500 transition-colors duration-300 font-medium tracking-wide"
+          >
+            {item.name}
+          </Link>
+        ))}
+      </div>
+    );
+  }
 
   useEffect(() => {
     setIsVisible(true);
@@ -86,44 +112,44 @@ const F1Predictions = () => {
         }}
       />
       
-      {/* Navigation - Same as landing page */}
+      {/* Navigation cu Link-uri funcționale */}
       <nav className="relative z-50 p-6 flex justify-between items-center bg-black/80 backdrop-blur-md border-b border-red-900/30">
         <div className="flex items-center space-x-4">
-          <button className="w-12 h-12 bg-gradient-to-br from-red-600 to-red-800 rounded-lg flex items-center justify-center font-black text-xl transform hover:scale-110 transition-all duration-300 cursor-pointer"
-          onClick={() => window.location.href = './'}>
+          <Link 
+            to="/"
+            className="w-12 h-12 bg-gradient-to-br from-red-600 to-red-800 rounded-lg flex items-center justify-center font-black text-xl transform hover:scale-110 transition-all duration-300 cursor-pointer"
+          >
             F1
-          </button>
+          </Link>
           <span className="text-2xl font-bold tracking-wider">FORMULA 1</span>
         </div>
-        <div className="hidden md:flex space-x-8">
-          {['Drivers', 'Teams', 'Races', 'Schedule', 'Login / Sign Up'].map((item) => (
-            <button key={item} className="hover:text-red-500 transition-colors duration-300 font-medium tracking-wide">
-              {item}
-            </button>
-          ))}
-        </div>
-        <button className="bg-red-600 hover:bg-red-700 px-6 py-2 rounded-full font-semibold transition-all duration-300 transform hover:scale-105 shadow-lg shadow-red-600/30"
-        onClick={() => window.location.href = '/F1Predictions'}>
+        
+        <NavigationMenuWithLinks />
+        
+        <Link 
+          to="/predictions"
+          className="bg-red-600 hover:bg-red-700 px-6 py-2 rounded-full font-semibold transition-all duration-300 transform hover:scale-105 shadow-lg shadow-red-600/30"
+        >
           View Predictions
-        </button>
+        </Link>
       </nav>
 
       {/* Racing Lines Animation - Similar to landing page */}
       <div className="absolute inset-0">
-          {[...Array(5)].map((_, i) => (
-            <div
-              key={i}
-              className={`absolute h-1 bg-gradient-to-r from-transparent via-red-500 to-transparent animate-pulse`}
-              style={{
-                top: `${20 + i * 15}%`,
-                left: '-100%',
-                width: '200%',
-                animation: `slide-${i} ${3 + i * 0.5}s linear infinite`,
-                animationDelay: `${i * 0.3}s`
-              }}
-            />
-          ))}
-        </div>
+        {[...Array(5)].map((_, i) => (
+          <div
+            key={i}
+            className={`absolute h-1 bg-gradient-to-r from-transparent via-red-500 to-transparent animate-pulse`}
+            style={{
+              top: `${20 + i * 15}%`,
+              left: '-100%',
+              width: '200%',
+              animation: `slide-${i} ${3 + i * 0.5}s linear infinite`,
+              animationDelay: `${i * 0.3}s`
+            }}
+          />
+        ))}
+      </div>
 
       {/* Main Content */}
       <div className="relative z-10 max-w-6xl mx-auto p-6">
@@ -306,6 +332,13 @@ const F1Predictions = () => {
             transform: translateX(0) scale(1); 
           }
         }
+
+        ${[...Array(5)].map((_, i) => `
+          @keyframes slide-${i} {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+          }
+        `).join('')}
       `}} />
 
       {/* Footer */}
