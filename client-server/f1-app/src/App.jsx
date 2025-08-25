@@ -4,6 +4,7 @@ import LandingPage from './LandingPage';
 import F1Predictions from './F1Predictions'; 
 import About from './About';
 import Races from './Races';
+import Teams from './Teams';
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
         <Route path="/F1Predictions" element={<F1Predictions />} />
         <Route path="/About" element={<About />} />
         <Route path="/Races" element={<Races />} />
+        <Route path="/Teams" element={<Teams />} />
       </Routes>
     </Router>
   );
