@@ -1,10 +1,10 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import LandingPage from './LandingPage';
-import F1Predictions from './F1Predictions'; 
-import About from './About';
-import Races from './Races';
-import Teams from './Teams';
+import LandingPage from './pages/LandingPage';
+import F1Predictions from './pages/F1Predictions'; 
+import About from './pages/About';
+import Races from './pages/Races';
+import Teams from './pages/Teams';
 
 function App() {
   return (

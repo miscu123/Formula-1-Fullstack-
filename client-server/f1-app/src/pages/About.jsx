@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { ChevronRight, Database, Brain, BarChart3, Users, Code, Zap, Target, Settings, Globe, Shield, TrendingUp } from 'lucide-react';
-import './LandingPage.css';
-import './F1Predictions';
 import { Link } from "react-router-dom";
+import Footer from "../components/layout/Footer";
+import Navbar from '../components/layout/Navbar';
+import Background from '../assets/F1-BKG.jpg';
 
 export default function About() {
   const [isVisible, setIsVisible] = useState(false);
@@ -17,16 +18,6 @@ export default function About() {
     window.addEventListener('mousemove', handleMouseMove);
     return () => window.removeEventListener('mousemove', handleMouseMove);
   }, []);
-
-  const getNavLink = (item) => {
-    switch(item) {
-        case 'Home': return '/';
-        case 'Predictions': return '/F1Predictions';
-        case 'Dashboard': return '#'; 
-        case 'Login / SignUp': return '#'; 
-        default: return '#';
-    }
-  };
 
   const objectives = [
     { 
@@ -83,6 +74,7 @@ export default function About() {
 
   return (
     <div className="min-h-screen bg-black text-white overflow-hidden">
+      {/* background gradient effect */}
       <div 
         className="fixed inset-0 opacity-10 pointer-events-none"
         style={{
@@ -91,33 +83,14 @@ export default function About() {
       />
       
       {/* Navigation */}
-      <nav className="relative z-50 p-6 flex justify-between items-center bg-black/80 backdrop-blur-md border-b border-red-900/30">
-        <Link to="/" className="flex items-center space-x-4">
-          <div className="w-12 h-12 bg-gradient-to-br from-red-600 to-red-800 rounded-lg flex items-center justify-center font-black text-xl transform hover:scale-110 transition-all duration-300 cursor-pointer">
-            F1
-          </div>
-          <span className="text-2xl font-bold tracking-wider">FORMULA 1</span>
-        </Link>
-        <div className="hidden md:flex space-x-8">
-        {['Home', 'Predictions', 'Dashboard', 'Login / SignUp'].map((item) => (
-            <Link 
-            key={item} 
-            to={getNavLink(item)} 
-            className="hover:text-red-500 transition-colors duration-300 font-medium tracking-wide">
-            {item}
-            </Link>
-        ))}
-        </div>
-        <Link to="/F1Predictions">
-          <button className="bg-red-600 hover:bg-red-700 px-6 py-2 rounded-full font-semibold transition-all duration-300 transform hover:scale-105 shadow-lg shadow-red-600/30"
-          >
-            View Predictions
-          </button>
-        </Link>
-      </nav>
+      <Navbar />
 
       {/* Hero Section */}
-      <section className="relative py-20 flex items-center justify-center overflow-hidden f1-bg">
+      <section
+        className="relative h-screen flex items-center justify-center overflow-hidden bg-cover bg-center"
+        style={{ backgroundImage: `url(${Background})` }}
+      >
+        <div className="absolute inset-0 bg-black/50"></div>
         {/* Racing Lines Animation */}
         <div className="absolute inset-0">
           {[...Array(3)].map((_, i) => (
@@ -300,38 +273,7 @@ export default function About() {
       </section>
 
       {/* Footer */}
-      <footer className="bg-gray-900 border-t border-gray-700 py-12 px-6">
-        <div className="max-w-6xl mx-auto">
-          <div className="grid md:grid-cols-4 gap-8 mb-8">
-            <div>
-              <div className="flex items-center space-x-4 mb-4">
-                <div className="w-10 h-10 bg-gradient-to-br from-red-600 to-red-800 rounded-lg flex items-center justify-center font-black">
-                  F1
-                </div>
-                <span className="text-xl font-bold">Overtake Intelligence</span>
-              </div>
-              <p className="text-gray-400">AI-powered Formula 1 predictions and analysis.</p>
-            </div>
-            
-            {['Predictors', 'Features', 'Tech Stack'].map((category) => (
-              <div key={category}>
-                <h4 className="font-bold mb-4">{category}</h4>
-                <div className="space-y-2">
-                  {['Dashboard', 'Predictions', 'Analytics'].map((link) => (
-                    <div key={link} className="text-gray-400 hover:text-white transition-colors cursor-pointer">
-                      {link}
-                    </div>
-                  ))}
-                </div>
-              </div>
-            ))}
-          </div>
-          
-          <div className="border-t border-gray-700 pt-8 text-center text-gray-400">
-            <p>&copy; 2025 Overtake Intelligence. All rights reserved. | Powered by Machine Learning.</p>
-          </div>
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
 }

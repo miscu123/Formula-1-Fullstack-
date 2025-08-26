@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { ChevronRight, Calendar, MapPin, Trophy, Clock, Users, Flag, Star, Target } from 'lucide-react';
-import './LandingPage.css';
-import { Link } from "react-router-dom";
+import Footer from "../components/layout/Footer";
+import Navbar from '../components/layout/Navbar';
 
 export default function Races() {
   const [isVisible, setIsVisible] = useState(false);
@@ -16,16 +16,6 @@ export default function Races() {
     window.addEventListener('mousemove', handleMouseMove);
     return () => window.removeEventListener('mousemove', handleMouseMove);
   }, []);
-
-  const getNavLink = (item) => {
-    switch(item) {
-        case 'Home': return '/';
-        case 'Predictions': return '/F1Predictions';
-        case 'Dashboard': return '#'; 
-        case 'Login / SignUp': return '#'; 
-        default: return '#';
-    }
-  };
 
   const race_calendar = [
     { 
@@ -175,29 +165,7 @@ export default function Races() {
       />
       
       {/* Navigation */}
-      <nav className="relative z-50 p-6 flex justify-between items-center bg-black/80 backdrop-blur-md border-b border-red-900/30">
-        <Link to="/" className="flex items-center space-x-4">
-          <div className="w-12 h-12 bg-gradient-to-br from-red-600 to-red-800 rounded-lg flex items-center justify-center font-black text-xl transform hover:scale-110 transition-all duration-300 cursor-pointer">
-            F1
-          </div>
-          <span className="text-2xl font-bold tracking-wider">FORMULA 1</span>
-        </Link>
-        <div className="hidden md:flex space-x-8">
-          {['Home', 'Predictions', 'Dashboard', 'Login / SignUp'].map((item) => (
-            <Link 
-              key={item} 
-              to={getNavLink(item)} 
-              className="hover:text-red-500 transition-colors duration-300 font-medium tracking-wide">
-              {item}
-            </Link>
-          ))}
-        </div>
-        <Link to="/F1Predictions">
-          <button className="bg-red-600 hover:bg-red-700 px-6 py-2 rounded-full font-semibold transition-all duration-300 transform hover:scale-105 shadow-lg shadow-red-600/30">
-            View Predictions
-          </button>
-        </Link>
-      </nav>
+      <Navbar />
 
       {/* Hero Section */}
       <section className="relative py-20 flex items-center justify-center overflow-hidden f1-bg">
@@ -330,89 +298,8 @@ export default function Races() {
         </div>
       </section>
 
-      {/* Call to Action */}
-      <section className="py-20 px-6 bg-gradient-to-r from-red-600 to-red-800">
-        <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-5xl font-black mb-6">PREDICT THE NEXT WINNER</h2>
-          <p className="text-xl mb-8 opacity-90 leading-relaxed">
-            Use our advanced AI predictions to forecast race outcomes and championship standings 
-            based on comprehensive data analysis and machine learning algorithms.
-          </p>
-          
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link to="/F1Predictions">
-              <button className="bg-white text-red-600 hover:bg-gray-100 px-8 py-4 rounded-full font-bold text-lg transition-all duration-300 transform hover:scale-105 shadow-2xl">
-                View AI Predictions
-              </button>
-            </Link>
-            <Link to="/">
-              <button className="border-2 border-white hover:bg-white hover:text-red-600 px-8 py-4 rounded-full font-bold text-lg transition-all duration-300">
-                Back to Home
-              </button>
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      {/* Enhanced CSS animations */}
-      <style dangerouslySetInnerHTML={{__html: `
-        @keyframes slideAnimation {
-          0% { transform: translateX(-100%); }
-          100% { transform: translateX(100%); }
-        }
-        
-        @keyframes slideInFromLeft {
-          from { 
-            opacity: 0; 
-            transform: translateX(-100px) scale(0.8); 
-          }
-          to { 
-            opacity: 1; 
-            transform: translateX(0) scale(1); 
-          }
-        }
-
-        ${[...Array(5)].map((_, i) => `
-          @keyframes slide-${i} {
-            0% { transform: translateX(-100%); }
-            100% { transform: translateX(100%); }
-          }
-        `).join('')}
-      `}} />
-
       {/* Footer */}
-      <footer className="bg-gray-900 border-t border-gray-700 py-12 px-6">
-        <div className="max-w-6xl mx-auto">
-          <div className="grid md:grid-cols-4 gap-8 mb-8">
-            <div>
-              <div className="flex items-center space-x-4 mb-4">
-                <div className="w-10 h-10 bg-gradient-to-br from-red-600 to-red-800 rounded-lg flex items-center justify-center font-black">
-                  F1
-                </div>
-                <span className="text-xl font-bold">Overtake Intelligence</span>
-              </div>
-              <p className="text-gray-400">Experience every race of the championship season.</p>
-            </div>
-            
-            {['Races', 'Predictions', 'Statistics'].map((category) => (
-              <div key={category}>
-                <h4 className="font-bold mb-4">{category}</h4>
-                <div className="space-y-2">
-                  {['Calendar', 'Results', 'Analysis'].map((link) => (
-                    <div key={link} className="text-gray-400 hover:text-white transition-colors cursor-pointer">
-                      {link}
-                    </div>
-                  ))}
-                </div>
-              </div>
-            ))}
-          </div>
-          
-          <div className="border-t border-gray-700 pt-8 text-center text-gray-400">
-            <p>&copy; 2025 Overtake Intelligence. All rights reserved. | Follow every lap of the season.</p>
-          </div>
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
 }
