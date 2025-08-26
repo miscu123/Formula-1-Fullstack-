@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { ChevronRight, Play, Calendar, Trophy, Zap, Users, ArrowRight, Star } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { ChevronRight, Trophy, Zap, ArrowRight, Star } from 'lucide-react';
+import Footer from "../components/layout/Footer";
+import Navbar from '../components/layout/Navbar';
+import SpeedIndicator from '../components/ui/SpeedIndicator'
 
-const F1Predictions = () => {
+export default function F1Predictions() {
   const [races, setRaces] = useState([]);
   const [selectedRace, setSelectedRace] = useState('');
   const [predictions, setPredictions] = useState(null);
@@ -12,65 +14,48 @@ const F1Predictions = () => {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [isVisible, setIsVisible] = useState(false);
 
-  // Navigation component cu Link-uri funcționale
-  function NavigationMenuWithLinks() {
-    const menuItems = [
-      { name: 'Drivers', path: '/drivers' },
-      { name: 'Teams', path: '/teams' },
-      { name: 'Races', path: '/races' },
-      { name: 'Schedule', path: '/schedule' },
-      { name: 'Login / Sign Up', path: '/auth' }
-    ];
+  // Menu items
+  const menuItems = [
+    { name: 'Home', path: '/' },
+    { name: 'Races', path: '/races' },
+    { name: 'Predictions', path: '/predictions' },
+  ];
 
-    return (
-      <div className="hidden md:flex space-x-8">
-        {menuItems.map((item) => (
-          <Link 
-            key={item.name} 
-            to={item.path}
-            className="hover:text-red-500 transition-colors duration-300 font-medium tracking-wide"
-          >
-            {item.name}
-          </Link>
-        ))}
-      </div>
-    );
-  }
+  // Podium positions
+  const podiumPositions = [
+    { position: '1st', gradient: 'from-yellow-500 to-yellow-600', bgGlow: 'shadow-yellow-500/30', ring: 'ring-yellow-400/50', icon: '🏆' },
+    { position: '2nd', gradient: 'from-gray-400 to-gray-500', bgGlow: 'shadow-gray-400/30', ring: 'ring-gray-400/50', icon: '🥈' },
+    { position: '3rd', gradient: 'from-orange-500 to-orange-600', bgGlow: 'shadow-orange-500/30', ring: 'ring-orange-400/50', icon: '🥉' }
+  ];
 
+  // Mouse follow effect
   useEffect(() => {
     setIsVisible(true);
-    const handleMouseMove = (e) => {
-      setMousePosition({ x: e.clientX, y: e.clientY });
-    };
+    const handleMouseMove = (e) => setMousePosition({ x: e.clientX, y: e.clientY });
     window.addEventListener('mousemove', handleMouseMove);
     return () => window.removeEventListener('mousemove', handleMouseMove);
   }, []);
 
-  // Fetch races list from backend
+  // Fetch races list
   const fetchRaces = async () => {
     try {
       const response = await fetch('http://localhost:8000/api/races/');
       if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
       const data = await response.json();
-
-      // Filter only 2024 races for latest races predictions
-      const races = data.filter(race => race.date.startsWith('2024'));
-      setRaces(races);
-
-      // Default to first race if available
-      if (races.length > 0) setSelectedRace(races[0].id);
+      const races2024 = data.filter(race => race.date.startsWith('2024'));
+      setRaces(races2024);
+      if (races2024.length > 0) setSelectedRace(races2024[0].id);
     } catch (err) {
       console.error('Error fetching races:', err);
       setError(err.message);
     }
   };
 
-  // Fetch predictions for the selected race
+  // Fetch predictions for selected race
   const fetchPredictions = async (raceId) => {
     if (!raceId) return;
     setLoading(true);
     setError(null);
-
     try {
       const response = await fetch(`http://localhost:8000/api/predict/?race_id=${raceId}`);
       if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
@@ -78,17 +63,19 @@ const F1Predictions = () => {
       setPredictions(data);
       setLastUpdated(new Date().toLocaleString());
     } catch (err) {
-      setError(err.message);
       console.error('Error fetching predictions:', err);
+      setError(err.message);
     } finally {
       setLoading(false);
     }
   };
 
+  // Fetch races on mount
   useEffect(() => {
     fetchRaces();
   }, []);
 
+  // Fetch predictions whenever selectedRace changes
   useEffect(() => {
     fetchPredictions(selectedRace);
   }, [selectedRace]);
@@ -96,45 +83,19 @@ const F1Predictions = () => {
   const handleRaceChange = (e) => setSelectedRace(e.target.value);
   const handleRefresh = () => fetchPredictions(selectedRace);
 
-  const podiumPositions = [
-    { position: '1st', gradient: 'from-yellow-500 to-yellow-600', bgGlow: 'shadow-yellow-500/30', ring: 'ring-yellow-400/50', icon: '🏆' },
-    { position: '2nd', gradient: 'from-gray-400 to-gray-500', bgGlow: 'shadow-gray-400/30', ring: 'ring-gray-400/50', icon: '🥈' },
-    { position: '3rd', gradient: 'from-orange-500 to-orange-600', bgGlow: 'shadow-orange-500/30', ring: 'ring-orange-400/50', icon: '🥉' }
-  ];
-  
   return (
     <div className="min-h-screen bg-black text-white overflow-hidden overflow-x-hidden">
-      {/* Mouse follow effect */}
-      <div 
+      {/* Mouse effect */}
+      <div
         className="fixed inset-0 opacity-10 pointer-events-none"
         style={{
           background: `radial-gradient(circle at ${mousePosition.x}px ${mousePosition.y}px, red 0%, transparent 50%)`
         }}
       />
-      
-      {/* Navigation cu Link-uri funcționale */}
-      <nav className="relative z-50 p-6 flex justify-between items-center bg-black/80 backdrop-blur-md border-b border-red-900/30">
-        <div className="flex items-center space-x-4">
-          <Link 
-            to="/"
-            className="w-12 h-12 bg-gradient-to-br from-red-600 to-red-800 rounded-lg flex items-center justify-center font-black text-xl transform hover:scale-110 transition-all duration-300 cursor-pointer"
-          >
-            F1
-          </Link>
-          <span className="text-2xl font-bold tracking-wider">FORMULA 1</span>
-        </div>
-        
-        <NavigationMenuWithLinks />
-        
-        <Link 
-          to="/predictions"
-          className="bg-red-600 hover:bg-red-700 px-6 py-2 rounded-full font-semibold transition-all duration-300 transform hover:scale-105 shadow-lg shadow-red-600/30"
-        >
-          View Predictions
-        </Link>
-      </nav>
 
-      {/* Racing Lines Animation - Similar to landing page */}
+      <Navbar />
+
+      {/* Racing lines animation */}
       <div className="absolute inset-0">
         {[...Array(5)].map((_, i) => (
           <div
@@ -151,23 +112,21 @@ const F1Predictions = () => {
         ))}
       </div>
 
-      {/* Main Content */}
       <div className="relative z-10 max-w-6xl mx-auto p-6">
-        {/* Hero Section */}
+        {/* Hero section */}
         <section className={`text-center py-20 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-20'}`}>
           <h1 className="text-6xl md:text-8xl font-black tracking-tighter mb-6 bg-gradient-to-r from-white via-red-300 to-white bg-clip-text text-transparent">
             AI Race
             <br />
             <span className="text-red-400">Predictions</span>
           </h1>
-          
           <p className="text-xl md:text-2xl text-gray-300 mb-12 max-w-3xl mx-auto leading-relaxed">
             Experience the future of motorsport analytics. Our AI predicts race outcomes with precision, 
             bringing you closer to the <span className="text-red-500 font-semibold">pinnacle of racing intelligence</span>.
           </p>
         </section>
 
-        {/* Race Selection Section - Styled like landing page cards */}
+        {/* Race selection */}
         <section className="py-16 bg-gradient-to-br from-gray-800/30 to-gray-900/50 rounded-3xl mb-16 border border-gray-700/50">
           <div className="text-center mb-12">
             <h2 className="text-4xl font-black mb-6 bg-gradient-to-r from-white to-red-500 bg-clip-text text-transparent">
@@ -204,7 +163,7 @@ const F1Predictions = () => {
               </div>
             )}
 
-            {/* Generate Predictions Button */}
+            {/* Generate predictions button */}
             <div className="text-center">
               <button
                 onClick={handleRefresh}
@@ -226,7 +185,7 @@ const F1Predictions = () => {
               </button>
             </div>
 
-            {/* Status Messages */}
+            {/* Status messages */}
             <div className="mt-8 text-center space-y-3">
               {lastUpdated && (
                 <div className="inline-flex items-center gap-2 bg-green-900/30 border border-green-600/50 rounded-xl px-4 py-2 text-green-300 text-sm">
@@ -246,7 +205,7 @@ const F1Predictions = () => {
           </div>
         </section>
 
-        {/* Predictions Display - Championship Standings Style */}
+        {/* Predictions display */}
         {predictions && (
           <section className="py-16">
             <div className="text-center mb-16">
@@ -308,74 +267,14 @@ const F1Predictions = () => {
           </section>
         )}
 
-        {/* Speed Indicator - Similar to landing page */}
-        <div className="fixed bottom-10 right-10 bg-gray-800/80 backdrop-blur-md border border-gray-600/40 rounded-2xl p-6 shadow-2xl">
-          <div className="text-4xl font-black text-red-500 mb-2">AI</div>
-          <div className="text-sm text-gray-400 uppercase tracking-wider">POWERED</div>
+        {/* Speed indicator */}
+        <div className="fixed bottom-6 right-6 z-50">
+          <SpeedIndicator value="AI" label="POWERED" />
         </div>
       </div>
-
-      {/* Enhanced CSS animations */}
-      <style dangerouslySetInnerHTML={{__html: `
-        @keyframes slideAnimation {
-          0% { transform: translateX(-100%); }
-          100% { transform: translateX(100%); }
-        }
-        
-        @keyframes slideInFromLeft {
-          from { 
-            opacity: 0; 
-            transform: translateX(-100px) scale(0.8); 
-          }
-          to { 
-            opacity: 1; 
-            transform: translateX(0) scale(1); 
-          }
-        }
-
-        ${[...Array(5)].map((_, i) => `
-          @keyframes slide-${i} {
-            0% { transform: translateX(-100%); }
-            100% { transform: translateX(100%); }
-          }
-        `).join('')}
-      `}} />
-
+      
       {/* Footer */}
-      <footer className="bg-gray-900 border-t border-gray-700 py-12 px-6">
-        <div className="max-w-6xl mx-auto">
-          <div className="grid md:grid-cols-4 gap-8 mb-8">
-            <div>
-              <div className="flex items-center space-x-4 mb-4">
-                <div className="w-10 h-10 bg-gradient-to-br from-red-600 to-red-800 rounded-lg flex items-center justify-center font-black">
-                  F1
-                </div>
-                <span className="text-xl font-bold">Overtake Intelligence</span>
-              </div>
-              <p className="text-gray-400">The pinnacle of motorsport excellence.</p>
-            </div>
-            
-            {['Predictors', 'Races', 'FAQ'].map((category) => (
-              <div key={category}>
-                <h4 className="font-bold mb-4">{category}</h4>
-                <div className="space-y-2">
-                  {['Link 1', 'Link 2', 'Link 3'].map((link) => (
-                    <div key={link} className="text-gray-400 hover:text-white transition-colors cursor-pointer">
-                      {link}
-                    </div>
-                  ))}
-                </div>
-              </div>
-            ))}
-          </div>
-          
-          <div className="border-t border-gray-700 pt-8 text-center text-gray-400">
-            <p>&copy; 2025 Overtake Intelligence. All rights reserved. | Experience the speed.</p>
-          </div>
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
-};
-
-export default F1Predictions;
+}
