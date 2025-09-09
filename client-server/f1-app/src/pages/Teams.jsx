@@ -22,143 +22,107 @@ export default function Teams() {
     { 
       icon: Car, 
       title: "Ferrari", 
-      date: "",
-      location: "",
+      date: "Founded: 1929",
+      location: "Base: Maranello",
       description: ""
     },
     { 
       icon: Car, 
       title: "McLaren", 
-      date: "",
-      location: "",
+      date: "Founded: 1963",
+      location: "Base: Woking",
       description: ""
     },
     { 
       icon: Car, 
       title: "Williams", 
-      date: "",
-      location: "",
-
+      date: "Founded: 1977",
+      location: "Base: Grove",
       description: ""
     },
     { 
       icon: Car, 
       title: "Lotus", 
-      date: "",
-      location: "",
+      date: "Founded: 1958",
+      location: "Base: Enstone",
 
       description: ""
     },
     { 
       icon: Car, 
       title: "Red Bull Racing", 
-      date: "",
-      location: "",
-
+      date: "Founded: 2004",
+      location: "Base: Milton Keynes",
       description: ""
     },
     { 
       icon: Car, 
       title: "Renault", 
-      date: "",
-      location: "",
-
+      date: "Founded: 1977",
+      location: "Base: Viry-Châtillon",
       description: ""
     },
     { 
       icon: Car, 
       title: "Brabham", 
-      date: "",
-      location: "",
-
-      description: ""
-    },
-    { 
-      icon: Car, 
-      title: "Sauber", 
-      date: "",
-      location: "",
-
-      description: ""
-    },
-    { 
-      icon: Car, 
-      title: "Minardi", 
-      date: "",
-      location: "",
-
-      description: ""
-    },
-    { 
-      icon: Car, 
-      title: "Mercedes", 
-      date: "",
-      location: "",
-
-      description: ""
-    },
-    { 
-      icon: Car, 
-      title: "Arrows", 
-      date: "",
-      location: "",
-
-      description: ""
-    },
-    { 
-      icon: Car, 
-      title: "Torro Rosso", 
-      date: "",
-      location: "",
-
-      description: ""
-    },
-    { 
-      icon: Car, 
-      title: "Benetton", 
-      date: "",
-      location: "",
-
-      description: ""
-    },
-    { 
-      icon: Car, 
-      title: "Jordan", 
-      date: "",
-      location: "",
-
+      date: "Founded: 1960",
+      location: "Base: Surbiton",
       description: ""
     },
     { 
       icon: Car, 
       title: "Alfa Romeo", 
-      date: "",
-      location: "",
-
+      date: "Founded: 1950",
+      location: "Base: Hinwil",
+      description: ""
+    },
+    { 
+      icon: Car, 
+      title: "Mercedes", 
+      date: "Founded: 2009",
+      location: "Base: Brackley",
+      description: ""
+    },
+    { 
+      icon: Car, 
+      title: "Torro Rosso", 
+      date: "Founded: 2005",
+      location: "Base: Faenza",
+      description: ""
+    },
+    { 
+      icon: Car, 
+      title: "Benetton", 
+      date: "Founded: 1986",
+      location: "Base: Enstone",
+      description: ""
+    },
+    { 
+      icon: Car, 
+      title: "Sauber", 
+      date: "Founded: 1993",
+      location: "Base: Hinwil",
       description: ""
     },
     { 
       icon: Car, 
       title: "Force India", 
-      date: "",
-      location: "",
-
+      date: "Founded: 2007",
+      location: "Base: Silverstone",
       description: ""
     },
     { 
       icon: Car, 
       title: "Haas", 
-      date: "",
-      location: "",
-
+      date: "Founded: 2014",
+      location: "Base: Kannapolis",
       description: ""
     },
     {
       icon: Car, 
       title: "Aston Martin", 
-      date: "",
-      location: "",
-      
+      date: "Founded: 2018",
+      location: "Base: Silverstone",
       description: ""
     }
   ];
@@ -274,7 +238,7 @@ export default function Teams() {
         <h2 className="text-5xl font-black mb-6">HISTORICAL TEAM STATS</h2>
         <div className="w-24 h-1 bg-red-600 mx-auto rounded-full mb-8"></div>
         <p className="text-xl text-gray-300 max-w-4xl mx-auto leading-relaxed">
-            Explore the complete history of 
+            Explore the history of 
             <span className="text-red-500 font-semibold"> Formula 1 teams</span>.
         </p>
         </div>
