@@ -5,10 +5,10 @@ const Navbar = () => {
   const navItems = [
     { name: 'Home', path: '/' },
     { name: 'Predictions', path: '/F1Predictions' },
-    { name: 'About', path: '/about' },
     { name: 'Races', path: '/races' },
     { name: 'Teams', path: '/teams' },
     { name: 'Dashboard', path: '/dashboard' },
+    { name: 'About', path: '/about' },
     { name: 'Login / SignUp', path: '/auth' }
   ];
 
